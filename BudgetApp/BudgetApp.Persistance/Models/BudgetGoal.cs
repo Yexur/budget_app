@@ -5,15 +5,11 @@ using System.Runtime.Serialization;
 
 namespace BudgetApp.Persistance.Models
 {
-    public class LedgerItem : EntityBase
+    public class BudgetGoal : EntityBase
     {
         [DataMember]
         [Required]
-        public string Description { get; set; }
-
-        [DataMember]
-        [Required]
-        public double Amount { get; set; }
+        public double Cost { get; set; }
 
         [DataMember]
         public string Note { get; set; }
@@ -24,6 +20,5 @@ namespace BudgetApp.Persistance.Models
 
         [ForeignKey("User_Id")]
         public virtual User User { get; set; }
-
     }
 }
