@@ -9,5 +9,6 @@ namespace BudgetApp.Persistance.Logic
         IQueryable<LedgerItem> GetList();
         void Save(LedgerItem ledgerItem);
         void Delete(int id);
+        IQueryable<LedgerItem> GetLedgerItemsByUserId(int userId);
     }
 }
