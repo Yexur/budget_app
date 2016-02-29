@@ -1,8 +1,5 @@
 ﻿
 var Summary = React.createClass({
-    //todo: this will pull the user name from a db table
-    //todo: the budget total will be a calculated number from the data returned for all the debits and credits done in the
-    //logic layer this will just get the value
     getInitialState: function () {
         return { data: [] };
     },
@@ -73,10 +70,3 @@ ReactDOM.render(
     <Summary />,
     document.getElementById('summaryContent')
 );
-
-//todo: the above is structred wrong.
-//summary component should get the data for the users and pass that to a child component
-//the child component should setup a label and the data for the label
-
-//the summary should get the budget totals and sum them up. done in the logic layer
-//that should be another component.  It will get the data from the summary component.
