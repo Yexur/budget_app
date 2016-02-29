@@ -61,7 +61,7 @@ var UserSummary = React.createClass({
                         <label>{this.props.user}</label>
                     </div>
                     <div className="col-md-6">
-                        <label>{this.props.total}</label>
+                        <label>$ {this.props.total}</label>
                     </div>
                 </div>
             </div>

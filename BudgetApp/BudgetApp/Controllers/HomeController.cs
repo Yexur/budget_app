@@ -1,4 +1,5 @@
 ﻿using BudgetApp.Persistance.Models;
+using BudgetApp.Persistance.Logic;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -6,7 +7,16 @@ namespace BudgetApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IList<SummaryView> _summarys;
+        private readonly IUserLogic _userLogic;
+
+        public HomeController()
+        {
+        }
+
+        public HomeController(IUserLogic userLogic)
+        {
+            _userLogic = userLogic;
+        }
 
         public ActionResult Index()
         {
@@ -29,32 +39,8 @@ namespace BudgetApp.Controllers
         
         public ActionResult LoadAllUsersSummary()
         {
-            TempLoadData();
-            return Json(_summarys, JsonRequestBehavior.AllowGet);
-        }
-
-        private void TempLoadData()
-        {
-            _summarys = new List<SummaryView>
-            {
-                new SummaryView
-                {
-                    Name = "Mike",
-                    TotalBudget = 67
-                },
-                new SummaryView
-                {
-                    Name ="Test1",
-                    TotalBudget = 57
-                },
-                new SummaryView
-                {
-                    Name = "Test2",
-                    TotalBudget = 87
-                }
-
-            };
-        }
-       
+            var summary = _userLogic.LoadAllUsersSummary();
+            return Json(summary, JsonRequestBehavior.AllowGet);
+        }       
     }
 }

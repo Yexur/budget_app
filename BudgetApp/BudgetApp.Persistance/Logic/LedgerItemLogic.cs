@@ -32,5 +32,10 @@ namespace BudgetApp.Persistance.Logic
         {
             _ledgerItemRpository.Delete(id);
         }
+
+        public IQueryable<LedgerItem> GetLedgerItemsByUserId(int userId)
+        {
+            return _ledgerItemRpository.GetLedgerItemsByUserId(userId);
+        }
     }
 }
