@@ -7,6 +7,9 @@ var Summary = React.createClass({
         var data = loadAllUsersSummary();
         this.setState({ data: data });
     },
+    loadDetails: function (userId) {
+        alert("The id is:" + userId);
+    },
     render: function () {
         return (
             <div className="summary">
@@ -15,7 +18,7 @@ var Summary = React.createClass({
                         <HeaderCol header="Name" headerClass="col-md-6"></HeaderCol>
                         <HeaderCol header="Total Budget" headerClass="col-md-6"></HeaderCol>
                     </div>
-                    <UserSummaryList data={this.state.data} />
+                    <UserSummaryList data={this.state.data} getDetails={this.loadDetails}/>
                 </div>            
             </div>
         );
@@ -38,12 +41,15 @@ var UserSummaryList = React.createClass({
     render: function () {
         var summaryNodes = this.props.data.map(function(userSummary){
             return(
-                <UserSummary user={userSummary.Name} total={userSummary.TotalBudget}></UserSummary>
+                <UserSummary user={userSummary.Name} total={userSummary.TotalBudget }
+                    handleClick={this.props.getDetails.bind(userSummary.UserId)}></UserSummary>
             );
         });
         return (
-            <div className="userSummaryList">
-                {summaryNodes}
+            <div className="row">
+                <div className="userSummaryList">
+                    {summaryNodes}
+                </div>
             </div>
         );
     }
@@ -52,19 +58,30 @@ var UserSummaryList = React.createClass({
 var UserSummary = React.createClass({
     render: function(){
         return( 
-            <div className="userSummary">
-                <div className="row">
-                    <div className="col-md-6">
-                        <label>{this.props.user}</label>
-                    </div>
-                    <div className="col-md-6">
-                        <label>$ {this.props.total}</label>
-                    </div>
+            <div className="userSummary">               
+                <div className="col-md-6">
+                    <label>{this.props.user}</label>
                 </div>
+                <div className="col-md-3">
+                    <label>$ {this.props.total}</label>
+                </div>
+                <div className="col-md-3">
+                    <label className="btn btn-primary" onClick={this.props.handleClick}>Details</label>
+                </div>                
             </div>
         );
     }
 });
+
+/*var DetailsButton = React.createClass({
+    render: function() {
+        return(
+            <div className="detailsButton">
+                 <label className="btn btn-primary" onClick={this.props.handleClick}>Details</label>
+            </div>
+        );
+    }
+});*/
 
 ReactDOM.render(
     <Summary />,
